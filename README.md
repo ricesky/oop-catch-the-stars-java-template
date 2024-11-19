@@ -233,7 +233,7 @@ public GamePanel() {
    ```
 2. Inisialisasi `Timer` di konstruktor:
    ```java
-   gameTimer = new Timer(20, e -> repaint());
+   gameTimer = new Timer(20, this);
    gameTimer.start();
    ```
 
