@@ -176,10 +176,6 @@ public class Star {
         return starLabel;
     }
 
-    public boolean isOutOfSky(int screenHeight) {
-        return starLabel.getY() > screenHeight;
-    }
-
     private ImageIcon loadIcon(String fileName, int width, int height) {
         ImageIcon icon = new ImageIcon(getClass().getResource("/" + fileName));
         Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -230,7 +226,7 @@ public GamePanel() {
 
 ### **6. Membuat Gerakan Star Jatuh**
 
-1. Tambahkan metode `fall` di kelas `Star` untuk mengimplementasi gerakan jatuh.
+1. Tambahkan metode `fall` di kelas `Star` untuk mengimplementasi gerakan jatuh. Tambahkan juga metode `isOutOfSky` untuk mengimplementasikan mekanisme pengecekan jika star sudah melewati layar.
 
 ```java
 package id.its.pbo;
@@ -245,6 +241,10 @@ public class Star {
 
     public void fall() {
         starLabel.setLocation(starLabel.getX(), starLabel.getY() + 5);
+    }
+
+    public boolean isOutOfSky(int screenHeight) {
+        return starLabel.getY() > screenHeight;
     }
 
 }
