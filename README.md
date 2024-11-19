@@ -16,7 +16,6 @@ Tutorial ini akan memandu Anda membuat game **"Catch the Stars"** menggunakan Ja
 - **Platform**: Java 11
 - **IDE**: Eclipse
 - **Project Type**: Maven
-
 ---
 
 ## **Struktur Folder**
@@ -123,15 +122,6 @@ public class Basket {
     public JLabel getComponent() {
         return basketLabel;
     }
-
-    public void moveLeft() {
-        basketLabel.setLocation(basketLabel.getX() - 15, basketLabel.getY());
-    }
-
-    public void moveRight(int screenWidth) {
-        basketLabel.setLocation(basketLabel.getX() + 15, basketLabel.getY());
-    }
-
     private ImageIcon loadIcon(String fileName, int width, int height) {
         ImageIcon icon = new ImageIcon(getClass().getResource("/" + fileName));
         Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -184,10 +174,6 @@ public class Star {
 
     public JLabel getComponent() {
         return starLabel;
-    }
-
-    public void fall() {
-        starLabel.setLocation(starLabel.getX(), starLabel.getY() + 5);
     }
 
     public boolean isOutOfSky(int screenHeight) {
@@ -244,7 +230,27 @@ public GamePanel() {
 
 ### **6. Membuat Gerakan Star Jatuh**
 
-1. Implementasikan interface `ActionListener` di `GamePanel`. Kemudian buat metode handler `actionPerformed` dan sambungkan dengan `gameTimer`. Metode `generateNewStar` dipanggil ketika `star` sudah melewati area window.
+1. Tambahkan metode `fall` di kelas `Star` untuk mengimplementasi gerakan jatuh.
+
+```java
+package id.its.pbo;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
+
+public class Star {
+
+    // kode sebelumnya...
+
+    public void fall() {
+        starLabel.setLocation(starLabel.getX(), starLabel.getY() + 5);
+    }
+
+}
+```
+
+2. Implementasikan interface `ActionListener` di `GamePanel`. Kemudian buat metode handler `actionPerformed` dan sambungkan dengan `gameTimer`. Metode `generateNewStar` dipanggil ketika `star` sudah melewati area window.
 
     ```java
     public class GamePanel extends JPanel implements ActionListener {
@@ -282,7 +288,26 @@ public GamePanel() {
 
 ### **7. Membuat Gerakan Kanan Kiri Basket**
 
-1. Implementasikan interface `KeyListener` di `GamePanel`
+1. Tambahkan metode `moveLeft` dan `moveRight` di kelas `Basket`.
+
+```java
+
+public class Basket {
+
+    // kode sebelumnya...
+
+    public void moveLeft() {
+        basketLabel.setLocation(basketLabel.getX() - 15, basketLabel.getY());
+    }
+
+    public void moveRight(int screenWidth) {
+        basketLabel.setLocation(basketLabel.getX() + 15, basketLabel.getY());
+    }
+    
+}
+```
+    
+3. Implementasikan interface `KeyListener` di `GamePanel`
 
    ```java
    public class GamePanel extends JPanel implements ActionListener, KeyListener {
